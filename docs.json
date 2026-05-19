@@ -7,11 +7,12 @@
     "light": "#FB7185",
     "dark": "#DC2626"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/icon-light-high-res.png",
   "navigation": {
     "tabs": [
       {
         "tab": "Product",
+        "icon": "flag",
         "groups": [
           {
             "group": "Getting started",
@@ -39,6 +40,7 @@
       },
       {
         "tab": "Platform",
+        "icon": "terminal",
         "groups": [
           {
             "group": "Development",
@@ -46,13 +48,15 @@
               "development",
               "platform/architecture",
               "platform/configuration",
-              "platform/contributing"
+              "platform/contributing",
+              "mcp"
             ]
           }
         ]
       },
       {
         "tab": "API reference",
+        "icon": "square-terminal",
         "groups": [
           {
             "group": "API guide",
@@ -81,14 +85,15 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/logo-light-high-res.png",
+    "dark": "/logo/logo-dark-high-res.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:contact@fastlytics.app"
+        "href": "mailto:contact@fastlytics.app",
+        "icon": "life-buoy"
       }
     ],
     "primary": {

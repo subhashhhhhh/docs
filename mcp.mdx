@@ -1,0 +1,190 @@
+---
+title: "MCP server"
+description: "Connect AI clients to Fastlytics telemetry, results, standings, and historical F1 data through the Fastlytics MCP server."
+icon: "plug-zap"
+---
+
+The Fastlytics MCP server gives AI clients structured access to Formula 1 telemetry, schedules, standings, results, bios, weather, and historical data.
+
+It is a standalone TypeScript service in `mcp-server/` and all data access goes through the Fastlytics worker API.
+
+## What it is for
+
+Use the MCP server when you want an AI client such as Claude, Cursor, VS Code, Windsurf, or Codex to query Fastlytics data directly instead of scraping pages.
+
+## What you need
+
+- Node.js `22` or higher
+- a Fastlytics MCP API key from `https://fastlytics.app/settings/api-keys`
+- an MCP client or a remote MCP-compatible HTTP client
+
+## Supported client setup paths
+
+The checked-in setup wizard can write configuration for:
+
+- Claude Desktop
+- Claude Code
+- Cursor
+- VS Code / GitHub Copilot
+- KiloCode
+- Codex
+- OpenCode
+- Windsurf
+
+## Fast path
+
+If you install from npm and do not already have `FASTLYTICS_MCP_API_KEY` set, the package starts an interactive setup wizard.
+
+```bash
+npx -y fastlytics-mcp
+```
+
+The wizard asks for your `fl_mcp_...` key and then writes client-specific MCP config.
+
+## Run from source
+
+```bash
+cd mcp-server
+npm install
+npm run build
+FASTLYTICS_MCP_API_KEY=fl_mcp_your_key_here node dist/index.js
+```
+
+By default, the source build starts the stdio transport.
+
+## Local transports
+
+<CardGroup cols={2}>
+  <Card title="stdio" icon="terminal-square">
+    Best for local agent clients such as Claude Desktop, Cursor, VS Code, and Windsurf.
+  </Card>
+  <Card title="HTTP" icon="globe-lock">
+    Best for remote MCP-compatible clients or your own hosted deployment.
+  </Card>
+</CardGroup>
+
+### stdio mode
+
+`stdio` is the default transport.
+
+```bash
+FASTLYTICS_MCP_API_KEY=fl_mcp_your_key_here node dist/index.js
+```
+
+### HTTP mode
+
+```bash
+TRANSPORT=http HTTP_PORT=3456 FASTLYTICS_MCP_API_KEY=fl_mcp_your_key_here node dist/index.js
+```
+
+This exposes the MCP endpoint at:
+
+```txt
+http://localhost:3456/mcp
+```
+
+## Remote endpoint
+
+Fastlytics also documents a hosted remote endpoint:
+
+```txt
+https://mcp.fastlytics.app/mcp
+```
+
+Pass your MCP key as a bearer token:
+
+```http
+Authorization: Bearer fl_mcp_your_key_here
+```
+
+## Environment variables
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `FASTLYTICS_MCP_API_KEY` | Yes | Your MCP key used for upstream Fastlytics API requests |
+| `FASTLYTICS_API_URL` | Optional | Worker API base URL override |
+| `TRANSPORT` | Optional | `stdio` or `http` |
+| `HTTP_PORT` | Optional | Local HTTP port, default `3456` |
+
+## Important note about API URL defaults
+
+<Warning>
+  The checked-in source currently defaults `FASTLYTICS_API_URL` to `https://dev-api.fastlytics.app` in `mcp-server/src/lib/config.ts`, while `.env.example` points to `https://api.fastlytics.app`. Set `FASTLYTICS_API_URL` explicitly if you want to control which worker environment your local source build uses.
+</Warning>
+
+## Tool workflow
+
+The server's own instructions recommend this standard flow:
+
+1. `list_events`
+2. `list_sessions`
+3. `list_drivers`
+4. `get_telemetry`, `get_laptimes`, or `get_race_results`
+
+For telemetry-heavy analysis, call `get_circuit_info` first so your client can relate trace distances to actual corners and braking zones.
+
+## Main tool groups
+
+<AccordionGroup>
+  <Accordion title="Sessions and discovery" icon="calendar-search">
+    `list_events`, `list_sessions`, and `list_drivers` help a client discover what data is available before it requests deeper analysis.
+  </Accordion>
+  <Accordion title="Telemetry and lap analysis" icon="gauge">
+    Tools cover speed, gear, throttle, brake, RPM, DRS, steering, lap times, lap positions, stints, and pace distribution.
+  </Accordion>
+  <Accordion title="Results and standings" icon="trophy">
+    Tools return race results, driver standings, team standings, championship progression, and team pace views.
+  </Accordion>
+  <Accordion title="Profiles and history" icon="users-round">
+    Tools support driver and team bios, head-to-head comparisons, leaderboards, championships, and teammate history.
+  </Accordion>
+  <Accordion title="Race context and weather" icon="cloud-sun">
+    Tools expose incidents, race control context, weather forecast, and weather lookup.
+  </Accordion>
+</AccordionGroup>
+
+## Example client config
+
+For local clients that accept `mcpServers` JSON, the setup wizard effectively writes config like this:
+
+```json
+{
+  "mcpServers": {
+    "fastlytics": {
+      "command": "npx",
+      "args": ["-y", "fastlytics-mcp"],
+      "env": {
+        "FASTLYTICS_MCP_API_KEY": "fl_mcp_your_key_here"
+      }
+    }
+  }
+}
+```
+
+## How requests flow
+
+<Steps>
+  <Step title="Your client calls the MCP server">
+    The client sends a typed MCP tool request over stdio or HTTP.
+  </Step>
+  <Step title="The MCP server calls the Fastlytics worker API">
+    The server forwards the request with `Authorization: Bearer <fl_mcp_...>`.
+  </Step>
+  <Step title="The worker routes the request">
+    The worker validates the key, uses cache or historical data where available, and falls back to backend processing when needed.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="401 invalid or expired key" icon="shield-alert">
+    Verify that the key starts with `fl_mcp_` and that you pasted the correct value into your client config.
+  </Accordion>
+  <Accordion title="403 access denied" icon="ban">
+    Your current Fastlytics tier may not include the endpoint or historical range you requested.
+  </Accordion>
+  <Accordion title="Unexpected worker environment" icon="git-branch">
+    Set `FASTLYTICS_API_URL` explicitly instead of relying on the checked-in source default.
+  </Accordion>
+</AccordionGroup>
