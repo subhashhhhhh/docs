@@ -49,7 +49,7 @@
               "platform/architecture",
               "platform/configuration",
               "platform/contributing",
-              "mcp"
+              "platform/mcp"
             ]
           }
         ]
