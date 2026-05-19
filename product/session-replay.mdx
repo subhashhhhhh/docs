@@ -1,0 +1,67 @@
+---
+title: "Session replay"
+description: "Rewatch a session with synced track position, timing, and telemetry context."
+icon: "play"
+---
+
+Session replay lets you watch a completed F1 session unfold inside the browser.
+
+Instead of only reading charts after the fact, you can scrub through the timeline and see how position, pace, and incidents developed in sequence.
+
+## What replay includes
+
+- driver positions on the track map
+- synced timing and leaderboard updates
+- telemetry context such as speed, RPM, gear, and DRS
+- session metadata and replay chunks for longer sessions
+
+## Best use cases
+
+<CardGroup cols={2}>
+  <Card title="Follow a battle" icon="flag">
+    Watch how two drivers traded time across a stint or after a pit cycle.
+  </Card>
+  <Card title="Review incidents" icon="triangle-alert">
+    Jump around the timeline to understand how an SC, VSC, or red flag affected the race.
+  </Card>
+  <Card title="Check tyre phases" icon="circle-dot">
+    Compare in-laps, out-laps, and tyre warm-up behavior against stint context.
+  </Card>
+  <Card title="Study race flow" icon="activity">
+    See how the field spread evolved across the full session instead of only looking at static charts.
+  </Card>
+</CardGroup>
+
+## Access and limits
+
+<Info>
+  Replay access is tiered. Free accounts get a short replay window. Pro unlocks unlimited session replay.
+</Info>
+
+## Practical workflow
+
+<Steps>
+  <Step title="Open replay from a race page">
+    Start from the event you care about, then switch to the replay section.
+  </Step>
+  <Step title="Scrub to the phase you care about">
+    Use the timeline to move to pit cycles, a safety car, a qualifying run, or the laps around an overtake.
+  </Step>
+  <Step title="Pair replay with charts">
+    Use replay for sequence and timing, then return to telemetry or lap analysis when you need exact pace or trace detail.
+  </Step>
+</Steps>
+
+## Things to keep in mind
+
+<AccordionGroup>
+  <Accordion title="Availability by season" icon="clock-3">
+    Replay depth and fidelity depend on the processed source data available for that session and season.
+  </Accordion>
+  <Accordion title="Chunked loading" icon="boxes">
+    Longer sessions may load in chunks. This reduces initial load time and makes replay practical for larger datasets.
+  </Accordion>
+  <Accordion title="Tier enforcement" icon="shield">
+    Premium route checks are enforced in the stack, not only in the UI. If a replay stops unexpectedly, check your plan or auth state first.
+  </Accordion>
+</AccordionGroup>

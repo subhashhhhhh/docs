@@ -1,0 +1,53 @@
+---
+title: "Data and availability"
+description: "Understand where Fastlytics data comes from, when it appears, and why gaps happen."
+icon: "database"
+---
+
+Fastlytics depends on upstream timing and telemetry data sources. That means coverage quality can vary by session and season.
+
+## Source of truth
+
+Fastlytics uses the FastF1 ecosystem and related processed datasets to power telemetry, timing, standings, and replay features.
+
+## What to expect
+
+<CardGroup cols={2}>
+  <Card title="Current season" icon="calendar-days">
+    This is the most complete and most actively used coverage tier.
+  </Card>
+  <Card title="Historical seasons" icon="clock-3">
+    Available on Pro, with older seasons sometimes offering less telemetry detail.
+  </Card>
+  <Card title="Post-session refresh" icon="refresh-cw">
+    Data is usually processed after a session completes rather than live during the session.
+  </Card>
+  <Card title="Gaps happen" icon="triangle-alert">
+    Missing telemetry channels or delayed availability can come from upstream limits rather than the UI itself.
+  </Card>
+</CardGroup>
+
+## Common reasons data is missing
+
+<AccordionGroup>
+  <Accordion title="Upstream source gaps" icon="database-zap">
+    Some laps, telemetry channels, or older sessions do not expose the same depth of data as modern race weekends.
+  </Accordion>
+  <Accordion title="Processing delay" icon="hourglass">
+    Recent sessions may need time to finish processing and caching before every surface is ready.
+  </Accordion>
+  <Accordion title="Tier restrictions" icon="shield">
+    If history or replay is unavailable, verify whether the session is outside the current Free-tier scope.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting checklist
+
+1. Refresh the page after the session has fully completed.
+2. Confirm the season and session are within your plan's access.
+3. Check whether the same gap appears across multiple charts or only one.
+4. If a recent session still looks incomplete after a reasonable delay, report it with the season, event, and session name.
+
+<Warning>
+  Fastlytics is an independent project and is not affiliated with Formula 1 or Formula One Licensing B.V.
+</Warning>

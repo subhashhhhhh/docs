@@ -1,0 +1,67 @@
+---
+title: "Race analysis"
+description: "Use the race workspace to compare drivers across telemetry, strategy, and lap data."
+icon: "chart-line"
+---
+
+The race workspace is the main place to analyze an event in Fastlytics.
+
+It combines the most useful session views into one place so you can move from broad race context to lap-level detail without changing tools.
+
+## Main sections
+
+<CardGroup cols={2}>
+  <Card title="Overview" icon="layout-dashboard">
+    Session context, race summary, and key event metadata.
+  </Card>
+  <Card title="Strategy" icon="route">
+    Tyre stints, pit windows, and race control context such as SC or VSC periods.
+  </Card>
+  <Card title="Lap analysis" icon="timer-reset">
+    Lap-time trends, pace distribution, and position changes over the session.
+  </Card>
+  <Card title="Telemetry" icon="gauge">
+    Speed, throttle, brake, RPM, DRS, and gear traces for selected laps.
+  </Card>
+</CardGroup>
+
+## Recommended workflow
+
+<Steps>
+  <Step title="Choose the session">
+    Start with a completed session from the dashboard, race page, or calendar. Practice or qualifying sessions are often easier to compare than a busy race.
+  </Step>
+  <Step title="Pick your drivers">
+    Select two drivers from the same session. Team-mates are a good first comparison because car performance is closer and the differences are easier to isolate.
+  </Step>
+  <Step title="Move from context to detail">
+    Start with strategy or lap-time trends, then drill into telemetry for the laps that explain the gap.
+  </Step>
+</Steps>
+
+## What each analysis surface answers
+
+<AccordionGroup>
+  <Accordion title="Strategy" icon="route">
+    Use this when you want to understand stint length, tyre choices, and how interruptions changed the race.
+  </Accordion>
+  <Accordion title="Head-to-head" icon="split-square-vertical">
+    Use this when you want a direct comparison between two drivers, laps, or sectors.
+  </Accordion>
+  <Accordion title="Telemetry" icon="gauge">
+    Use this when you want to explain where time was gained or lost on track.
+  </Accordion>
+  <Accordion title="Lap analysis" icon="timer-reset">
+    Use this when you want to see consistency, degradation, and pace swings over a stint.
+  </Accordion>
+</AccordionGroup>
+
+## Tips
+
+<Tip>
+  Start with the question you are trying to answer. For example: "Why was Driver A faster in sector two?" Then work backward through lap selection and telemetry.
+</Tip>
+
+<Tip>
+  If a telemetry trace looks incomplete, check `/product/data-and-availability` first. Some sessions and older seasons have partial upstream coverage.
+</Tip>

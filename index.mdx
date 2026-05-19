@@ -1,133 +1,79 @@
 ---
 title: "Introduction"
-description: "Welcome to the new home for your documentation"
-icon: 'star'
+description: "Learn what Fastlytics does, what is included, and where to start."
+icon: "flag"
 ---
 
-## Setting up
+Fastlytics is an independent Formula 1 analytics platform for telemetry, lap analysis, race strategy, standings, and session replay.
 
-Get your documentation site up and running in minutes.
+You can use it directly in the browser. Most of the product is available without setup. An account unlocks saved content, discussions, notifications, and other personalized features.
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+<Info>
+  Fastlytics is not affiliated with Formula 1. Data availability depends on the upstream timing and telemetry sources exposed through FastF1 and related providers.
+</Info>
 
-## Make it yours
+## Start here
 
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Open the app, pick a season, and start with the race workspace.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Plans and limits" icon="badge-dollar-sign" href="/product/plans-and-limits">
+    See what is included on Free and what Pro unlocks.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## Core workflows
 
-Everything you need to create world-class documentation.
+<CardGroup cols={2}>
+  <Card title="Race analysis" icon="chart-line" href="/product/race-analysis">
+    Compare drivers across telemetry, laps, strategy, and head-to-head views.
+  </Card>
+  <Card title="Session replay" icon="play" href="/product/session-replay">
+    Rewatch a session with synced track position, timing, and telemetry overlays.
+  </Card>
+  <Card title="Account and community" icon="users" href="/product/account-and-community">
+    Save charts, follow discussions, and manage favorites and notifications.
+  </Card>
+  <Card title="Data and availability" icon="database" href="/product/data-and-availability">
+    Understand season coverage, refresh timing, and common data gaps.
+  </Card>
+</CardGroup>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## For builders
 
-## Make your content agent ready
-
-Make your docs work for humans and AI agents alike.
-
-<Columns cols={2}>
-  <Card
-    title="Prompt component"
-    icon="robot"
-    href="/agent-ready/prompt"
-  >
-    Embed shareable AI prompts readers can copy or open in Cursor.
+<CardGroup cols={2}>
+  <Card title="Local development" icon="terminal" href="/development">
+    Run the frontend, backend API, worker, and docs preview locally.
   </Card>
-  <Card
-    title="Visibility"
-    icon="eye"
-    href="/agent-ready/visibility"
-  >
-    Show different content to humans and agents reading your docs.
+  <Card title="Architecture" icon="network" href="/platform/architecture">
+    See how the React app, FastAPI backend, Cloudflare worker, and Supabase fit together.
   </Card>
-  <Card
-    title="Contextual menu"
-    icon="bolt"
-    href="/agent-ready/contextual"
-  >
-    Give readers one-click access to Claude, ChatGPT, Cursor, and more.
+  <Card title="Configuration" icon="sliders-horizontal" href="/platform/configuration">
+    Review the main environment variables and runtime secrets.
   </Card>
-  <Card
-    title="AI coding tools"
-    icon="wand-magic-sparkles"
-    href="/ai-tools/claude-code"
-  >
-    Set up Claude Code, Cursor, or Windsurf with Mintlify's skill.
+  <Card title="API reference" icon="square-terminal" href="/api-reference/introduction">
+    Browse the internal API surface used by the Fastlytics web app.
   </Card>
-</Columns>
+</CardGroup>
 
-## Need inspiration?
+## What Fastlytics includes
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<AccordionGroup>
+  <Accordion title="Telemetry and lap analysis" icon="gauge">
+    Speed, throttle, brake, RPM, DRS, gear traces, lap deltas, sector comparisons, and pace distribution.
+  </Accordion>
+  <Accordion title="Race context" icon="flag">
+    Strategy, stints, incidents, standings, championship progression, and team pace views.
+  </Accordion>
+  <Accordion title="Replay and profiles" icon="play">
+    Session replay, driver and team profiles, historical season coverage, and shareable saved charts.
+  </Accordion>
+  <Accordion title="Community features" icon="message-circle">
+    News, discussions, replies, voting, public profiles, and notifications based on your favorites.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  If you are new to the platform, start with `/quickstart`, then move to `/product/race-analysis` and `/product/session-replay`.
+</Tip>

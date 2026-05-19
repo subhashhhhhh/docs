@@ -1,52 +1,52 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "Fastlytics Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#EF4444",
+    "light": "#FB7185",
+    "dark": "#DC2626"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Product",
         "groups": [
           {
             "group": "Getting started",
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "product/plans-and-limits"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Using Fastlytics",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "product/race-analysis",
+              "product/session-replay",
+              "product/account-and-community"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Data and coverage",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/components",
-              "essentials/reusable-snippets"
+              "product/data-and-availability"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Platform",
+        "groups": [
           {
-            "group": "Agent ready",
+            "group": "Development",
             "pages": [
-              "agent-ready/prompt",
-              "agent-ready/visibility",
-              "agent-ready/contextual",
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "development",
+              "platform/architecture",
+              "platform/configuration",
+              "platform/contributing"
             ]
           }
         ]
@@ -55,18 +55,11 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "API guide",
             "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/introduction",
+              "api-reference/authentication",
+              "api-reference/endpoints"
             ]
           }
         ]
@@ -75,14 +68,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Open app",
+          "href": "https://fastlytics.app",
+          "icon": "gauge"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Pricing",
+          "href": "https://fastlytics.app/pricing",
+          "icon": "badge-dollar-sign"
         }
       ]
     }
@@ -95,13 +88,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:contact@fastlytics.app"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Open app",
+      "href": "https://fastlytics.app"
     }
   },
   "contextual": {
@@ -118,9 +111,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/fastlytics",
+      "instagram": "https://instagram.com/fastlytics"
     }
   }
 }

@@ -1,0 +1,51 @@
+---
+title: "Architecture"
+description: "Overview of the Fastlytics frontend, backend, edge worker, and data flow."
+icon: "network"
+---
+
+Fastlytics is split into a frontend app, a backend API, and a Cloudflare worker that sits in front of the API.
+
+## Main parts
+
+| Layer | Location | Responsibility |
+| --- | --- | --- |
+| Frontend | `src/` | React SPA for dashboards, race analysis, replay, settings, and community features |
+| Backend API | `backend-api/` | FastAPI app for telemetry retrieval, tier logic, payments, news, and discussion features |
+| Worker | `workers-v2 (new and updated)/` | Edge proxy, auth checks, caching, and selected historical or replay routes |
+| Data and auth | Supabase, FastF1, R2 | User auth, profile data, processed race data, and cached replay artifacts |
+
+## Request flow
+
+<Steps>
+  <Step title="Frontend request">
+    The frontend calls the shared request helper and attaches the user's Supabase access token when present.
+  </Step>
+  <Step title="Worker processing">
+    The Cloudflare worker validates tokens for protected surfaces, injects the backend API key, applies CORS rules, and serves edge-cached responses when possible.
+  </Step>
+  <Step title="Backend execution">
+    FastAPI routes fetch or compute the requested data, apply tier rules, and return the payload the app expects.
+  </Step>
+</Steps>
+
+## Why the worker exists
+
+- keeps backend secrets out of the frontend
+- centralizes CORS and auth checks
+- improves performance with cacheable edge responses
+- lets premium and replay routes enforce limits before requests reach deeper services
+
+## Important implementation notes
+
+<AccordionGroup>
+  <Accordion title="Frontend defaults" icon="monitor">
+    The frontend runs on port `8080` in development and uses `VITE_API_BASE_URL` to decide where requests go.
+  </Accordion>
+  <Accordion title="Backend auth model" icon="shield-check">
+    The backend normally expects an `X-API-Key` on protected routes. The worker injects this in production flows.
+  </Accordion>
+  <Accordion title="Replay and historical data" icon="play">
+    Replay metadata and chunked session artifacts can be served through the worker and R2-backed helpers for better performance.
+  </Accordion>
+</AccordionGroup>

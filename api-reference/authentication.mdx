@@ -1,0 +1,49 @@
+---
+title: "Authentication"
+description: "How auth, API keys, and premium-route checks work in the Fastlytics stack."
+icon: "shield-check"
+---
+
+Fastlytics uses two main auth layers for application traffic.
+
+## Layer 1: user authentication
+
+The frontend authenticates users with Supabase. When a user is signed in, the app sends their access token with API requests.
+
+## Layer 2: backend protection
+
+Protected backend routes expect an `X-API-Key`. In normal production traffic, the Cloudflare worker injects that key before proxying requests to the backend.
+
+## Why this split exists
+
+- users authenticate with a standard browser-friendly auth flow
+- the frontend never needs the backend secret key
+- the worker can enforce premium or protected route checks close to the edge
+
+## Request example
+
+```http
+GET /api/standings/progression?year=2025 HTTP/1.1
+Host: api.fastlytics.app
+Authorization: Bearer <supabase-access-token>
+```
+
+The worker validates the bearer token where required, then forwards the request with the backend API key.
+
+## Tiered access
+
+<AccordionGroup>
+  <Accordion title="Free tier" icon="badge">
+    Current-season analytics are broadly available, while replay depth and historical access stay limited.
+  </Accordion>
+  <Accordion title="Pro tier" icon="gem">
+    Historical seasons and unlimited session replay are the main unlocks.
+  </Accordion>
+  <Accordion title="Protected routes" icon="lock">
+    Replay, some advanced standings or telemetry flows, and similar premium surfaces may be checked in the worker and the backend.
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  Do not embed backend API secrets in client-side code. If you need machine-to-machine access, route it through a trusted server environment.
+</Warning>

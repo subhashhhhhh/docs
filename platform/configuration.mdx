@@ -1,0 +1,53 @@
+---
+title: "Configuration"
+description: "Key environment variables and runtime settings across the Fastlytics stack."
+icon: "sliders-horizontal"
+---
+
+This page summarizes the main configuration surfaces that matter when you run or change Fastlytics locally.
+
+## Frontend variables
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `VITE_SUPABASE_URL` | Yes | Supabase project URL used for auth and client operations |
+| `VITE_SUPABASE_ANON_KEY` | Yes | Public Supabase anon key |
+| `VITE_API_BASE_URL` | Usually | Base URL for API requests. Defaults to `https://api.fastlytics.app` |
+| `VITE_FASTLYTICS_API_KEY` | Optional | Legacy or direct backend access path |
+| `VITE_UMAMI_WEBSITE_ID` | Optional | Umami analytics |
+| `VITE_PUBLIC_POSTHOG_KEY` | Optional | PostHog client key |
+| `VITE_PUBLIC_POSTHOG_HOST` | Optional | PostHog host |
+
+## Backend variables
+
+| Variable | Purpose |
+| --- | --- |
+| `FASTLYTICS_API_KEY` | Shared key expected on protected backend routes |
+| `FRONTEND_URL` | Allowed frontend origins |
+| `SUPABASE_URL` | Supabase instance URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-side Supabase access |
+| `SUPABASE_JWT_SECRET` | JWT verification |
+| `DODO_PAYMENTS_API_KEY` | Billing integration |
+| `DODO_PAYMENTS_WEBHOOK_SECRET` | Billing webhook verification |
+| `FASTF1_CACHE_PATH` | Local FastF1 cache directory |
+
+## Worker secrets and config
+
+| Variable | Purpose |
+| --- | --- |
+| `FASTLYTICS_API_KEY` | Injected into proxied backend requests |
+| `SUPABASE_JWT_SECRET` | JWT validation in the worker |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase server access where required |
+| `WEATHER_API_KEY` | Optional weather proxy support |
+
+## Local stack defaults
+
+- frontend dev server: `http://localhost:8080`
+- docs preview: `http://localhost:3000`
+- backend API: local `uvicorn` process
+
+## Cautions
+
+<Warning>
+  Do not assume every production route or domain is fully represented by the checked-in worker config. Verify the live deployment setup before documenting external operational details.
+</Warning>

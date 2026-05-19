@@ -1,95 +1,93 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
-icon: 'terminal'
+title: "Local development"
+description: "Run the Fastlytics frontend, backend, worker, and docs locally."
+icon: "terminal"
 ---
 
-<Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-</Info>
+Use this guide when you want to work on the product, the API stack, or this Mintlify docs site from your machine.
 
-Follow these steps to install and run Mintlify on your operating system.
+## Prerequisites
+
+- Node.js for the frontend, worker, and docs
+- Python for the FastAPI backend
+- A `.env` file for the frontend and the backend values you need locally
 
 <Steps>
-<Step title="Install the Mintlify CLI">
+<Step title="Run the frontend app">
+
+```bash
+npm install
+npm run dev
+```
+
+The frontend dev server runs on `http://localhost:8080`.
+</Step>
+
+<Step title="Run the backend API">
+
+From `backend-api/`:
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+The backend serves the FastAPI app locally and powers routes that are not satisfied by cached worker data.
+
+</Step>
+<Step title="Run the Cloudflare worker">
+
+From `workers-v2 (new and updated)/`:
+
+```bash
+npm install
+npm run dev
+```
+
+The worker handles request proxying, edge caching, JWT validation, and some premium-route enforcement.
+  </Step>
+
+  <Step title="Preview the docs site">
+
+From the docs repository root, install Mintlify's CLI if needed and start the preview:
 
 ```bash
 npm i -g mint
-```
-</Step>
-
-<Step title="Preview locally">
-
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
-
-```bash
 mint dev
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
-
-</Step>
+The docs preview is available at `http://localhost:3000` by default.
+  </Step>
 </Steps>
 
-## Custom ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+## Useful checks
 
 ```bash
-mint dev --port 3333
-```
+# frontend
+npm run lint
+npm run test:ci
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+# backend-api
+pytest
+ruff check .
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
-
-## Mintlify versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
-```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
-
-```bash
+# docs
 mint broken-links
+mint validate
 ```
 
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
+## Notes
 
 <AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
+  <Accordion title="Frontend port" icon="globe">
+    The active frontend dev port is `8080`, not `5173`.
   </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
+  <Accordion title="Worker directory name" icon="folder">
+    The worker directory contains spaces. Quote the path in shell commands if you are not already inside it.
+  </Accordion>
+  <Accordion title="Auth in local development" icon="shield">
+    The frontend uses Supabase auth. The backend may skip API-key enforcement locally when `FASTLYTICS_API_KEY` is unset, but production traffic normally flows through the worker.
   </Accordion>
 </AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).

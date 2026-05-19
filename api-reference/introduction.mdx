@@ -1,33 +1,52 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Introduction"
+description: "Overview of the Fastlytics API surface used by the web application."
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+This section documents the API surface currently used by the Fastlytics web app.
 
-## Welcome
+## What this API does
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+Fastlytics uses a layered API architecture:
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+- the React frontend sends authenticated requests
+- the Cloudflare worker validates tokens, injects the backend API key, and serves cacheable responses
+- the FastAPI backend handles data retrieval, tier enforcement, payments, news, and discussion features
 
-## Authentication
+## Base URL
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+Production frontend requests default to:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```txt
+https://api.fastlytics.app
 ```
+
+In local development, the frontend uses `VITE_API_BASE_URL`.
+
+## Important scope note
+
+<Warning>
+  This is not yet a stable public developer API with versioned guarantees. It is the internal API contract that powers the current Fastlytics application.
+</Warning>
+
+## Main API domains
+
+<CardGroup cols={2}>
+  <Card title="Sessions and schedule" icon="calendar" href="/api-reference/endpoints">
+    Session lists, event schedules, and race metadata.
+  </Card>
+  <Card title="Telemetry and lap data" icon="gauge" href="/api-reference/endpoints">
+    Speed, throttle, brake, DRS, RPM, laps, and sector comparisons.
+  </Card>
+  <Card title="Standings and results" icon="trophy" href="/api-reference/endpoints">
+    Drivers, teams, progression, race results, and team pace.
+  </Card>
+  <Card title="Replay and profiles" icon="play" href="/api-reference/endpoints">
+    Replay metadata, chunks, driver pages, and team pages.
+  </Card>
+</CardGroup>
+
+## Next pages
+
+- `/api-reference/authentication` for auth and access control
+- `/api-reference/endpoints` for the current endpoint groups and examples

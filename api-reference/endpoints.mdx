@@ -1,0 +1,72 @@
+---
+title: "Endpoints"
+description: "Current endpoint groups and representative routes used by the Fastlytics app."
+icon: "list-tree"
+---
+
+This page summarizes the current endpoint groups referenced by the web app.
+
+## Sessions and schedule
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/sessions` | List sessions for a given season and event |
+| `GET /api/session/drivers` | List drivers in a specific session |
+| `GET /api/schedule/{year}` | Return the season schedule |
+| `GET /api/schedule/{year}/{event}/sessions` | Return session schedule for an event |
+
+## Telemetry and lap data
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/telemetry/speed` | Speed trace |
+| `GET /api/telemetry/throttle` | Throttle trace |
+| `GET /api/telemetry/brake` | Brake trace |
+| `GET /api/telemetry/rpm` | RPM trace |
+| `GET /api/telemetry/drs` | DRS state or zones |
+| `GET /api/telemetry/gear` | Gear trace |
+| `GET /api/telemetry/gear-map` | Gear map data |
+| `GET /api/laptimes` | Lap-time comparison |
+| `GET /api/lapdata/positions` | Lap-by-lap position data |
+| `GET /api/comparison/sectors` | Sector-by-sector driver comparison |
+
+## Strategy and race context
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/strategy` | Tyre strategy by session |
+| `GET /api/stint-analysis` | Detailed stint metrics |
+| `GET /api/track-evolution` | Track evolution and lap-time trends |
+| `GET /api/incidents` | SC, VSC, and red-flag periods |
+
+## Standings and results
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/standings/drivers` | Driver standings |
+| `GET /api/standings/teams` | Team standings |
+| `GET /api/standings/progression` | Championship progression |
+| `GET /api/results/races` | Race winners by season |
+| `GET /api/results/race/{year}/{eventSlug}` | Detailed event results |
+| `GET /api/team-pace/summary` | Season team pace summary |
+| `GET /api/team-pace/event` | Event-specific team pace detail |
+
+## Replay and profiles
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/replay/session` | Full replay session data |
+| `GET /api/replay/metadata` | Replay metadata |
+| `GET /api/replay/chunk` | Chunked replay payload |
+| `GET /api/driver/{driverId}` | Driver details |
+| `GET /api/team/{teamId}` | Team details |
+
+## Notes
+
+<Info>
+  Endpoint names and payload shapes are derived from the current application code and can change as the internal API evolves.
+</Info>
+
+<Tip>
+  If you are tracing behavior from the app, start with `src/lib/api.ts` and the matching backend router in `backend-api/app/routers/`.
+</Tip>

@@ -1,0 +1,41 @@
+---
+title: "Contributing"
+description: "Guidelines for editing and validating the Fastlytics docs site."
+icon: "git-pull-request"
+---
+
+Use this page when you want to improve the docs without changing unrelated product code.
+
+## Workflow
+
+<Steps>
+  <Step title="Edit the relevant page">
+    Update an existing page when possible instead of creating duplicates. If you add a new page, also add it to `docs.json`.
+  </Step>
+  <Step title="Preview locally">
+    Run `mint dev` from the docs repository root and confirm the navigation, headings, and links look right.
+  </Step>
+  <Step title="Validate before merge">
+    Run `mint broken-links` and `mint validate` before opening or merging a change.
+  </Step>
+</Steps>
+
+## Writing rules
+
+- write in second person
+- keep headings in sentence case
+- use root-relative internal links without file extensions
+- prefer concrete product workflows over generic feature summaries
+- add a TODO comment instead of guessing a production detail
+
+## Source of truth
+
+If a page describes product behavior, verify it against the codebase first:
+
+- frontend flows in `src/`
+- backend behavior in `backend-api/`
+- proxy and route behavior in `workers-v2 (new and updated)/`
+
+<Tip>
+  Small precise corrections are better than broad rewrites that introduce uncertainty.
+</Tip>

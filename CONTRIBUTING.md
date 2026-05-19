@@ -1,8 +1,6 @@
-> **Customize this file**: Tailor this template to your project by noting specific contribution types you're looking for, adding a Code of Conduct, or adjusting the writing guidelines to match your style.
-
 # Contribute to the documentation
 
-Thank you for your interest in contributing to our documentation! This guide will help you get started.
+This repository uses Mintlify and MDX. Keep contributions small, verifiable, and aligned with the current product.
 
 ## How to contribute
 
@@ -18,11 +16,11 @@ Thank you for your interest in contributing to our documentation! This guide wil
 2. Install the Mintlify CLI: `npm i -g mint`
 3. Create a branch for your changes
 4. Make changes
-5. Navigate to the docs directory and run `mint dev`
+5. Run `mint dev` from the repository root
 6. Preview your changes at `http://localhost:3000`
 7. Commit your changes and submit a pull request
 
-For more details on local development, see our [development guide](development.mdx).
+For more details on local development, see `/development`.
 
 ## Writing guidelines
 
@@ -30,5 +28,14 @@ For more details on local development, see our [development guide](development.m
 - **Address the reader directly**: Use "you" instead of "the user"
 - **Keep sentences concise**: Aim for one idea per sentence
 - **Lead with the goal**: Start instructions with what the user wants to accomplish
-- **Use consistent terminology**: Don't alternate between synonyms for the same concept
+- **Use consistent terminology**: Match the project-specific terms in `AGENTS.md`
 - **Include examples**: Show, don't just tell
+
+## Validation before opening a PR
+
+```bash
+mint broken-links
+mint validate
+```
+
+If the change touches product behavior or implementation details, verify the source of truth in the Fastlytics app or backend code before merging.
